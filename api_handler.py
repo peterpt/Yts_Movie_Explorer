@@ -133,9 +133,20 @@ class APIHandler:
             return None
 
     def get_image_data(self, url):
+        # Define a browser-like User-Agent to bypass 403 Forbidden errors
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+        
         try:
-            with urlopen(url, timeout=10) as response:
-                return response.read()
+            # Use requests.get with headers instead of urlopen
+            response = requests.get(url, headers=headers, timeout=10)
+            
+            if response.status_code == 200:
+                return response.content # Return binary image data
+            else:
+                print(f"Image download failed. Status: {response.status_code} URL: {url}")
+                return None
         except Exception as e:
             print(f"Failed to download image from {url}: {e}")
             return None

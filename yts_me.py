@@ -222,7 +222,9 @@ class MovieApp:
             self.root.after(0, self._set_ui_state, tk.NORMAL)
 
     def _update_results_list(self, movies):
-        self.tree.delete(*self.tree.get_children()); self.movies_cache = movies
+        self.tree.delete(*self.tree.get_children())
+        self.movies_cache = movies
+        
         if not movies:
             self._clear_all_details()
             self.status_label.config(text="No movies found matching your criteria.")
@@ -230,9 +232,24 @@ class MovieApp:
         else:
             self.status_label.place_forget()
             for movie in movies:
+                # 1. Safely get genres
                 genres = ', '.join(movie.get('genres', ['N/A'])[:2])
-                self.tree.insert("", tk.END, iid=movie['id'], values=(movie['title'], movie['year'], movie['rating'], genres))
-            first_movie_id = self.tree.get_children()[0]; self.tree.selection_set(first_movie_id); self.tree.focus(first_movie_id)
+                
+                # 2. Safely get other fields using .get()
+                # If 'rating' is missing, it defaults to 0
+                title = movie.get('title', 'Unknown Title')
+                year = movie.get('year', 'N/A')
+                rating = movie.get('rating', 0) 
+
+                # Insert into tree
+                self.tree.insert("", tk.END, iid=movie['id'], values=(title, year, rating, genres))
+            
+            # Select the first item if available
+            if self.tree.get_children():
+                first_movie_id = self.tree.get_children()[0]
+                self.tree.selection_set(first_movie_id)
+                self.tree.focus(first_movie_id)
+                
         self._update_pagination()
     
     def _on_movie_select(self, event=None):
