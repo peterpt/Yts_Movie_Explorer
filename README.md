@@ -3,14 +3,13 @@ an app written in python using AI from google to download movies torrent from yt
 this app uses the yts api to search for movies
 
 ## Pictures without tmbd api configured
-<img width="1008" height="678" alt="image" src="https://github.com/user-attachments/assets/5b4039f1-9416-4095-8e57-a36b26831d69" />
-
-<img width="1008" height="678" alt="image" src="https://github.com/user-attachments/assets/ff30b808-ed79-4fcf-9166-0fd2228421dd" />
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/c37a9682-aee3-4562-8ab1-aa1d1fd7e31d" />
 
 ## Picture with tmbd api included
-<img width="1008" height="678" alt="image" src="https://github.com/user-attachments/assets/aa80114b-f760-4a7d-bb8d-f288d2f64850" />
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/e9b3a557-6031-4845-87e6-d77690772252" />
 
-- tmdb api is optional , it will allow you to watch the trailer of the movie in your web browser
+
+- tmdb api is optional , it will allow you to watch the trailer of the movie in your web browser and get movie story details
 - this app will only download the magnets and will open your default torrent client and import the data to it
 - for download  , the app itself does not download any movie , only provides options .
 
